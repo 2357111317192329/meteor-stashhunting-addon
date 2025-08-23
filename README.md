@@ -9,6 +9,8 @@
   - Fake fly option allows you to fly with a chestplate on to minimize lost durability.
 - TrailFollower (Credit to [WarriorLost](https://github.com/warriorlost) for creating the original TrailFollower this was based off)
   - Follows trails in all dimensions using either pitch40 or baritone. May break on path splits or other cases.
+- TrailMaker
+  - Saves the chunks you plot using the xaeros map, and adjusts your yaw to face each chunk in order as you go to each one.
 - BetterStashFinder
   - Pretty much the same as meteors stash finder except some extra features:
     - It doesn't look for stashes in unloaded chunks
