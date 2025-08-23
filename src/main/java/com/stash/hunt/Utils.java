@@ -157,6 +157,17 @@ public class Utils
         return itemCount;
     }
 
+    public static float smoothRotation(double current, double target, double rotationScaling)
+    {
+        double difference = angleDifference(target, current);
+        return (float) (current + difference * rotationScaling);
+    }
+
+    public static double angleDifference(double target, double current)
+    {
+        double diff = (target - current + 180) % 360 - 180;
+        return diff < -180 ? diff + 360 : diff;
+    }
 
     public static void sendWebhook(String webhookURL, String title, String message, String pingID, String playerName)
     {
