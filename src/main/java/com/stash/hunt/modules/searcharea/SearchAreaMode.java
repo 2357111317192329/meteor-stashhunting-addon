@@ -50,11 +50,6 @@ public class SearchAreaMode
     public void onMessageReceive(ReceiveMessageEvent event)
     {
         Text message = event.getMessage();
-        if (message.getString().contains("joined the game"))
-        {
-            // why is it a double???
-            paused = (long) (System.nanoTime() + 1e10);
-        }
         if (searchArea.webhookMode.get() != SearchArea.WebhookSettings.Off)
         {
             String title;
