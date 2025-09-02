@@ -44,6 +44,11 @@ public class SearchAreaMode
         setPressed(mc.options.forwardKey, false);
     }
 
+    public void disable()
+    {
+        if (searchArea.isActive()) searchArea.toggle();
+    }
+
     protected File getJsonFile(String fileName) {
         try
         {
