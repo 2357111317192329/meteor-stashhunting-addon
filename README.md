@@ -5,8 +5,8 @@
 ## Features
 - ElytraFlyPlusPlus
   - Has a bounce mode with a baritone obstacle passer for highways, including ring-roads.
-  - Motion Y Boost mode can go up to 105 bps.
-  - Fake fly option allows you to fly with a chestplate on to minimize lost durability.
+  - Motion Y Boost mode can go up to 200 bps. (1.20.4 ViaVersion required for 2b2t)
+  - Fake fly option allows you to fly with a chestplate on to minimize lost durability. (Does not work on 2b2t)
 - TrailFollower (Credit to [WarriorLost](https://github.com/warriorlost) for creating the original TrailFollower this was based off)
   - Follows trails in all dimensions using either pitch40 or baritone. May break on path splits or other cases.
 - TrailMaker
