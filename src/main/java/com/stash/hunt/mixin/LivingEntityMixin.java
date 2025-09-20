@@ -40,7 +40,7 @@ public abstract class LivingEntityMixin extends Entity
         }
     }
 
-    @Inject(at = @At("HEAD"), method = "isGliding", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "isFallFlying", cancellable = true)
     private void isGliding(CallbackInfoReturnable<Boolean> cir)
     {
         if (mc.player != null && mc.player.getBrain().equals(this.getBrain()) && efly != null && efly.enabled())

@@ -156,7 +156,7 @@ public class AutoPortal extends Module {
 
         for (int i = 0; i < 9; i++) {
             if (mc.player.getInventory().getStack(i).getItem() == Items.OBSIDIAN) {
-                mc.player.getInventory().setSelectedSlot(i);
+                mc.player.getInventory().selectedSlot = i;
                 break;
             }
         }
@@ -215,7 +215,7 @@ public class AutoPortal extends Module {
             // auto light
             for (int i = 0; i < 9; i++) {
                 if (mc.player.getInventory().getStack(i).getItem() == Items.FLINT_AND_STEEL) {
-                    mc.player.getInventory().setSelectedSlot(i);
+                    mc.player.getInventory().selectedSlot = i;
 
                     BlockPos firePos = portalBlocks.get(0).up();
                     BlockHitResult fireHit = new BlockHitResult(Vec3d.ofCenter(firePos), Direction.UP, firePos, false);
