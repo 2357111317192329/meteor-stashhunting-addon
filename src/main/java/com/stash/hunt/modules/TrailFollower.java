@@ -365,7 +365,7 @@ public class TrailFollower extends Module
                 }
                 // set original pos to pathDistance blocks in the direction the player is facing
                 Vec3d offset = (new Vec3d(Math.sin(-mc.player.getYaw() * Math.PI / 180), 0, Math.cos(-mc.player.getYaw() * Math.PI / 180)).normalize()).multiply(pathDistance.get());
-                Vec3d targetPos = mc.player.getPos().add(offset);
+                Vec3d targetPos = mc.player.getEntityPos().add(offset);
                 for (int i = 0; i < (maxTrailLength.get() * startDirectionWeighting.get()); i++)
                 {
                     trail.add(targetPos);
@@ -516,10 +516,10 @@ public class TrailFollower extends Module
                             Vec3d baritoneTarget;
                             if (netherPathMode.get() == NetherPathMode.AVERAGE) {
                                 Vec3d averagePos = calculateAveragePosition(trail);
-                                Vec3d directionVec = averagePos.subtract(mc.player.getPos()).normalize();
-                                Vec3d predictedPos = mc.player.getPos().add(directionVec.multiply(10));
+                                Vec3d directionVec = averagePos.subtract(mc.player.getEntityPos()).normalize();
+                                Vec3d predictedPos = mc.player.getEntityPos().add(directionVec.multiply(10));
                                 targetYaw = Rotations.getYaw(predictedPos);
-                                baritoneTarget = positionInDirection(mc.player.getPos(), targetYaw, pathDistanceActual);
+                                baritoneTarget = positionInDirection(mc.player.getEntityPos(), targetYaw, pathDistanceActual);
                             } else {
                                 Vec3d lastPos = trail.getLast();
                                 baritoneTarget = lastPos;
@@ -530,7 +530,7 @@ public class TrailFollower extends Module
                         }
                     } else {
                         // use average path for overworld
-                        Vec3d targetPos = positionInDirection(mc.player.getPos(), targetYaw, pathDistanceActual);
+                        Vec3d targetPos = positionInDirection(mc.player.getEntityPos(), targetYaw, pathDistanceActual);
                         BaritoneAPI.getProvider().getPrimaryBaritone().getCustomGoalProcess().setGoalAndPath(new GoalXZ((int) targetPos.x, (int) targetPos.z));
 
                         targetYaw = Rotations.getYaw(targetPos); // smooth rotation target
@@ -557,7 +557,7 @@ public class TrailFollower extends Module
     private void onRender(Render3DEvent event)
     {
         if (!debug.get()) return;
-        Vec3d targetPos = positionInDirection(mc.player.getPos(), targetYaw, 10);
+        Vec3d targetPos = positionInDirection(mc.player.getEntityPos(), targetYaw, 10);
         // target line
         event.renderer.line(mc.player.getX(), mc.player.getY(), mc.player.getZ(), targetPos.x, targetPos.y, targetPos.z, new Color(255, 0, 0));
         // chunk
@@ -672,8 +672,8 @@ public class TrailFollower extends Module
         if (!trail.isEmpty()) {
             if (followMode == FollowMode.YAWLOCK) {
                 Vec3d averagePos = calculateAveragePosition(trail);
-                Vec3d positionVec = averagePos.subtract(mc.player.getPos()).normalize();
-                Vec3d targetPos = mc.player.getPos().add(positionVec.multiply(10));
+                Vec3d positionVec = averagePos.subtract(mc.player.getEntityPos()).normalize();
+                Vec3d targetPos = mc.player.getEntityPos().add(positionVec.multiply(10));
                 targetYaw = Rotations.getYaw(targetPos);
             } else {
                 Vec3d lastTrailPoint = trail.getLast();
@@ -730,7 +730,7 @@ public class TrailFollower extends Module
         info(message);
         if (!webhookLink.get().isEmpty())
         {
-            sendWebhook(webhookLink.get(), "TrailFollower", message, null, mc.player.getGameProfile().getName());
+            sendWebhook(webhookLink.get(), "TrailFollower", message, null, mc.player.getGameProfile().name());
         }
     }
 
