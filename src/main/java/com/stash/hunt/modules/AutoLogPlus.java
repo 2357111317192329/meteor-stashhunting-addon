@@ -240,7 +240,7 @@ public class AutoLogPlus extends Module
         }
         if (logPosition.get())
         {
-            double distanceToTarget = mc.player.getPos().multiply(1,0,1).distanceTo(position.get().toCenterPos().multiply(1,0,1));
+            double distanceToTarget = mc.player.getEntityPos().multiply(1,0,1).distanceTo(position.get().toCenterPos().multiply(1,0,1));
             if (distanceToTarget < distance.get())
             {
                 logOut("Player was within " + distanceToTarget + " blocks of the target position.", true);

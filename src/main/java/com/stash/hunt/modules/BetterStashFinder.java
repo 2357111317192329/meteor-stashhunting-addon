@@ -337,7 +337,7 @@ public class BetterStashFinder extends Module
                     else
                     {
                         String message = "Found stash at " + chunk.x + ", " + chunk.z + ".";
-                        new Thread(() -> sendWebhook(webhookLink.get(), title, message, ping.get() ? discordId.get() : null, mc.player.getGameProfile().getName())).start();
+                        new Thread(() -> sendWebhook(webhookLink.get(), title, message, ping.get() ? discordId.get() : null, mc.player.getGameProfile().name())).start();
                     }
                 }
 
@@ -721,6 +721,6 @@ public class BetterStashFinder extends Module
         {
             if (disableOnTeleport.get() && mc.player.squaredDistanceTo(lastPosition) > 16 * 16) this.toggle();
         }
-        lastPosition = mc.player.getPos();
+        lastPosition = mc.player.getEntityPos();
     }
 }

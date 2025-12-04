@@ -261,12 +261,12 @@ public class ElytraFlyPlusPlus extends Module {
         paused = false;
         waitingForChunksToLoad = false;
         elytraToggled = false;
-        lastPos = mc.player.getPos();
-        lastUnstuckPos = mc.player.getPos();
+        lastPos = mc.player.getEntityPos();
+        lastUnstuckPos = mc.player.getEntityPos();
         stuckTimer = 0;
 
         // I don't know any other way to fix this stupid shit
-        if (bounce.get() && mc.player.getPos().multiply(1, 0, 1).length() >= 100)
+        if (bounce.get() && mc.player.getEntityPos().multiply(1, 0, 1).length() >= 100)
         {
             if (BaritoneAPI.getProvider().getPrimaryBaritone().getElytraProcess().currentDestination() == null)
             {
@@ -313,7 +313,7 @@ public class ElytraFlyPlusPlus extends Module {
 
         if (lastPos != null)
         {
-            double speedBps = mc.player.getPos().subtract(lastPos).multiply(20, 0, 20).length();
+            double speedBps = mc.player.getEntityPos().subtract(lastPos).multiply(20, 0, 20).length();
 
             Timer timer = Modules.get().get(Timer.class);
             if (timer.isActive()) {
@@ -330,7 +330,7 @@ public class ElytraFlyPlusPlus extends Module {
             }
         }
 
-        lastPos = mc.player.getPos();
+        lastPos = mc.player.getEntityPos();
     }
 
     @Override
@@ -410,10 +410,10 @@ public class ElytraFlyPlusPlus extends Module {
             else
             {
                 stuckTimer = 0;
-                lastUnstuckPos = mc.player.getPos();
+                lastUnstuckPos = mc.player.getEntityPos();
             }
 
-            if (highwayObstaclePasser.get() && mc.player.getPos().length() > 100 && // > 100 check needed bc server sends queue coordinates when joining in first tick causing goal coordinates to be set to (0, 0)
+            if (highwayObstaclePasser.get() && mc.player.getEntityPos().length() > 100 && // > 100 check needed bc server sends queue coordinates when joining in first tick causing goal coordinates to be set to (0, 0)
                 (mc.player.getY() < targetY.get() || mc.player.getY() > targetY.get() + 2 || (mc.player.horizontalCollision && !mc.player.collidedSoftly) // collisions / out of highway
                 || (portalTrap != null && portalTrap.getSquaredDistance(mc.player.getBlockPos()) < portalAvoidDistance.get() * portalAvoidDistance.get()) // portal trap detection
                 || waitingForChunksToLoad // waiting for chunks to load
@@ -425,7 +425,7 @@ public class ElytraFlyPlusPlus extends Module {
                 double currDistance = distance.get(); // Keep checking farther distances until a goal is found that has a block beneath it
 
                 if (portalTrap != null) {
-                    currDistance += mc.player.getPos().distanceTo(portalTrap.toCenterPos());
+                    currDistance += mc.player.getEntityPos().distanceTo(portalTrap.toCenterPos());
                     portalTrap = null;
                     info("Pathing around portal.");
                 }
@@ -439,7 +439,7 @@ public class ElytraFlyPlusPlus extends Module {
                         return;
                     }
                     Vec3d unitYawVec = yawToDirection(yaw.get());
-                    Vec3d travelVec = mc.player.getPos().subtract(startPos.get().toCenterPos());
+                    Vec3d travelVec = mc.player.getEntityPos().subtract(startPos.get().toCenterPos());
 
                     double parallelCurrPosDot = travelVec.multiply(new Vec3d(1, 0, 1)).dotProduct(unitYawVec);
                     Vec3d parallelCurrPosComponent = unitYawVec.multiply(parallelCurrPosDot);
@@ -594,7 +594,7 @@ public class ElytraFlyPlusPlus extends Module {
 
         // Check if chunk is on the players path
         Vec3d moveDir = yawToDirection(yaw.get());
-        double distanceToHighway = distancePointToDirection(Vec3d.of(centerPos), moveDir, mc.player.getPos());
+        double distanceToHighway = distancePointToDirection(Vec3d.of(centerPos), moveDir, mc.player.getEntityPos());
 
         if (distanceToHighway > 21) return;
 
@@ -606,7 +606,7 @@ public class ElytraFlyPlusPlus extends Module {
                 {
                     BlockPos position = new BlockPos(pos.x * 16 + x, y, pos.z * 16 + z);
 
-                    if (distancePointToDirection(Vec3d.of(position), moveDir, mc.player.getPos()) > portalScanWidth.get()) continue;
+                    if (distancePointToDirection(Vec3d.of(position), moveDir, mc.player.getEntityPos()) > portalScanWidth.get()) continue;
 
                     if (mc.world.getBlockState(position).getBlock().equals(Blocks.NETHER_PORTAL)) // TODO: This position could be unloaded
                     {

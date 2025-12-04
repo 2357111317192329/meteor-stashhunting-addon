@@ -219,7 +219,7 @@ public class OldChunkNotifier extends Module {
                 String finalMessage = message; // must be final for thread operations
                 // use threads so if a ton of chunks come at once it doesnt lag the game
                 String discordID = !ping.get() || discordId.get().isBlank() ? null : discordId.get();
-                new Thread(() -> sendWebhook(webhookLink.get(), "Old Chunk Detected", finalMessage + " at " + mc.player.getPos().toString(), discordID, mc.player.getGameProfile().getName())).start();
+                new Thread(() -> sendWebhook(webhookLink.get(), "Old Chunk Detected", finalMessage + " at " + mc.player.getEntityPos().toString(), discordID, mc.player.getGameProfile().name())).start();
             }
         }
 
@@ -238,7 +238,7 @@ public class OldChunkNotifier extends Module {
                 if (logType.get() == LogType.Both || logType.get() == LogType.Webhook)
                 {
                     String discordID = !ping.get() || discordId.get().isBlank() ? null : discordId.get();
-                    new Thread(() -> sendWebhook(webhookLink.get(), "Old Chunk Detected", "Old chunk detected off the highway at " + chunkPos.x * 16 + " " + chunkPos.z * 16, discordID, mc.player.getGameProfile().getName())).start();
+                    new Thread(() -> sendWebhook(webhookLink.get(), "Old Chunk Detected", "Old chunk detected off the highway at " + chunkPos.x * 16 + " " + chunkPos.z * 16, discordID, mc.player.getGameProfile().name())).start();
                 }
             }
         }
