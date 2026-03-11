@@ -2,10 +2,10 @@ name: Publish Development Build
 on:
     push:
         branches:
-            - "1.21.10"
+            - "1.21.11"
 
 env:
-  MINECRAFT_VERSION: "1.21.10"
+  MINECRAFT_VERSION: "1.21.11"
 
 jobs:
   build:
