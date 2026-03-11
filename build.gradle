@@ -1,9 +1,11 @@
 plugins {
-    id "fabric-loom" version "1.13-SNAPSHOT"
+    id "fabric-loom" version "1.14.9"
 }
 
 
-archivesBaseName = project.archives_base_name
+base {
+    archivesName = project.archives_base_name
+}
 version = project.mod_version
 minecraft_version = project.minecraft_version
 group = project.maven_group
